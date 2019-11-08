@@ -24,12 +24,12 @@ namespace CPUTest
         {
             double sumreg = Summ();
             return sumreg;
-        }
+        }/*
         public double BackNumber() // Return of result into CPU
         {
             cpu.GetDataBus().GetAddresBus().GetRAM().ramRegisters[0] = 0;
             cpu.GetDataBus().GetAddresBus().GetRAM().ramRegisters[1] = 0;
             return cpu.GetDataBus().GetAddresBus().GetRAM().ramRegisters[2] = SumReg();
-        }
+        }*/
     }
 }

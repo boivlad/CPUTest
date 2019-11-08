@@ -9,8 +9,8 @@ namespace CPUTest
     public class RAM
     {
         int i = 0, j = 0;
-        public double[] ramRegisters = new double[3]; // RAM registers
-        public int[] ramAddres = new int[3]; // RAM addreses 
+        public double[] ramRegisters = new double[5]; // RAM registers
+        public int[] ramAddres = new int[5]; // RAM addreses 
         
         
         public double [] AddNumber(double number) // Add number into register
@@ -40,9 +40,12 @@ namespace CPUTest
         }
         public void AddresChange() // Supporting method to change addres of register to get the second number
         {
-            ramAddres[0] = ramAddres[1];
-            ramAddres[1] = ramAddres[2];
-            ramAddres[2] = 0;
+            double temp = ramAddres[0];
+            for (int a= 1; a<ramAddres.Length; a++)
+            {
+                ramAddres[a - 1] = ramAddres[a];
+            }
+            ramAddres[ramAddres.Length - 1] = 0;
         }
         public double GetNumberByAddres(int address) // Getting of number inside the register by it's addres
         {

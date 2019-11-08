@@ -10,8 +10,8 @@ namespace CPUTest
     {
         private DataBus dataBus;
         int i = 0, j = 0;
-        public double[] registers = new double[3]; // CPU registers
-        public int[] addres = new int[3]; // CPU addreses 
+        public double[] registers = new double[4]; // CPU registers
+        public int[] addres = new int[4]; // CPU addreses 
         int comandCounter = 0; // Counter of comand
 
         public CPU(DataBus dataBus) // Getting of data from Data Bus
@@ -20,7 +20,7 @@ namespace CPUTest
         }
         public void GetCommand() // Getting the code of comand
         {
-            Console.WriteLine("Я получил команду 1");
+            Console.Write(" Я получил команду 1");
             DecodeComand(comandCounter);
             comandCounter++;
         }
@@ -32,13 +32,12 @@ namespace CPUTest
         {
             if ( comandCounter==0 )
             {
-                Console.WriteLine("Команда обработана. Опецация сумма");
-                Console.WriteLine("Мне необходим адрес операнда");
+                Console.Write(" Команда обработана. Опецация сумма");
             }
         }
         public double [] Reg( ) // Add number from Addres Bus to CPU register
         {
-            if (i == registers.Length)
+            if (i == registers.Length-1)
             {
                 i = 0;
             }
@@ -59,11 +58,11 @@ namespace CPUTest
         }
         public double SetSummCPU(double sum) // Add result of summ to third register
         {
-            return registers[2] = sum;
+            return registers[3] = sum;
         }
         public double GetSum() // Getting of summ result
         {
-            return registers[2];
+            return registers[3];
         }
     }
 }

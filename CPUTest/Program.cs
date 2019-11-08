@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace CPUTest
 {
-    //lab work 1
-    //student Daria Ezerovich
     class Program
     {
         static void Main(string[] args)
@@ -21,12 +19,12 @@ namespace CPUTest
             Console.WriteLine("Добро пожаловать в эмулятор работы ЦП по сложению двух чисел. Далее эмуляция работы всех компонентов будет следующая: процессор - синий, шина данных - красная, шина адреса - желтая, АЛУ - зеленая, оперативная память - фиолетовая, весь вспомогательный функционал - белый. Введите входные данные в соответствии с требованиями");
 
             Console.WriteLine();
-            Console.Write("Введите первый операнд в десятичном виде: ");
-            element = double.Parse(Console.ReadLine());
-            ram.AddNumber(element);
-            Console.Write("Введите второй операнд в десятичном виде: ");
-            element = double.Parse(Console.ReadLine());
-            ram.AddNumber(element);
+            for (int i =1 ; i < 3; i++ )
+            {
+                Console.Write("Введите {0} операнд в десятичном виде: ", i);
+                element = double.Parse(Console.ReadLine());
+                ram.AddNumber(element);
+            }
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkMagenta; // RAM work
             Console.WriteLine("Ваши данные хранятся в Оперативной памяти следующим образом ");
@@ -34,61 +32,73 @@ namespace CPUTest
 
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;// CPU work
-            Console.WriteLine();
             cPU.GetCommand();
-            Console.WriteLine();
 
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkYellow; // Addres Bus work 
-            Console.WriteLine("Адрес операнда: " + addresBus.AddresBusData());
-
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Red; // Data Bus work
-            Console.Write("На шину данных поступило: " );
-            dataBus.GetIntBinaryNumber(dataBus.Number());
-            Console.WriteLine();
-            Console.WriteLine("В десятичном виде "+dataBus.Number());
+            Console.Write(" Адрес операнда:  " + addresBus.AddresBusData());
             cPU.Reg();
             ram.AddresChange();
             Console.ForegroundColor = ConsoleColor.Blue;// CPU work
             Console.WriteLine();
-            Console.WriteLine("Мне необходим адрес операнда");
+
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red; // Data Bus work
+            Console.Write(" На шину данных поступило и передается " + dataBus.Number() + " : "); 
+            dataBus.GetIntBinaryNumber(dataBus.Number());
+            //dataBus.ShowBus();
             Console.WriteLine();
 
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkYellow; // Addres Bus work 
-            Console.WriteLine("Адрес операнда: " + addresBus.AddresBusData());
+            Console.Write(" Адрес операнда: " + addresBus.AddresBusData());
+            cPU.Reg();
+            ram.AddresChange();
+            Console.WriteLine();
 
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red; // Data Bus work
-            Console.Write("На шину данных поступило: ");
+            Console.Write(" На шину данных поступило и передается " + dataBus.Number() + " : "); 
             dataBus.GetIntBinaryNumber(dataBus.Number());
+            //dataBus.ShowBus();
             Console.WriteLine();
-            Console.WriteLine("В десятичном виде " + dataBus.Number());
 
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Нормализация чисел"); // Этого я не сделала так как нормализовать нечего я не привела числа к мантиссе и порядку
-            Console.WriteLine("Числа из регистров процессора извлекаются в АЛУ");
+            Console.Write(" Нормализация чисел");
             Console.WriteLine();
-            cPU.Reg();
+
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write(" Числа из регистров процессора извлекаются в АЛУ");
+
+            Console.WriteLine();
+
+            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Green;// ALU work
-            Console.WriteLine("Сумма равна АЛУ " + aLU.Summ());
+            Console.Write(" Сумма равна АЛУ " + aLU.Summ());
             cPU.SetSummCPU(aLU.Summ());
+            cPU.Reg();
+            Console.WriteLine();
+
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;// CPU work
-            Console.WriteLine("Сумма в регистре процессора " + cPU.GetSum());
+            double getSum = cPU.GetSum();
+            Console.Write(" Сумма в регистре процессора " + getSum);
             Console.WriteLine();
-            aLU.BackNumber();
+
+            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red; // Data Bus work
-            Console.Write("На шину данных поступило: " );
-            dataBus.GetIntBinaryNumber(cPU.GetSum());
+            Console.Write(" На шину данных поступило и передается " + getSum + " : ");
+            dataBus.GetIntBinaryNumber(getSum);
+            //dataBus.ShowBus();
             Console.WriteLine();
-            Console.WriteLine("В десятичном виде " +cPU.GetSum());
+
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkMagenta; // RAM work
-            Console.WriteLine("В оперативную память поступил результат суммы " + ram.GetNumberByAddres(2));
-            ram.ShowMass();
+            Console.Write(" В оперативную память поступил результат суммы " + getSum);
+            Console.WriteLine();
+
             
             Console.ReadKey();
         }
